@@ -158,5 +158,6 @@
     // TODO: include a discreet terms of use; acceptable use policy; notice that lists are compared server side
     // TODO: if options tray is open upon hitting submit, then have it be open again in results.django
     // TODO: add output sorting option alphabetical case-insensitive (CI), vs. case-sensitive (CS). put tooltips over CI and CS to explain
+    // TODO: add some tests!
   </script>
 {% endblock %}
