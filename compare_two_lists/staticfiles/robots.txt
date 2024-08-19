@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /drafts/
+Disallow: /search
+
+Sitemap: http://django7.guffeydev.com/sitemap.xml
+

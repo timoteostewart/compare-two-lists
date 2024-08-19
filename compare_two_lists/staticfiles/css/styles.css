@@ -1,0 +1,215 @@
+/* static/css/styles.css */
+
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+body {
+    font-family: 'Oswald', 'Arial', sans-serif;
+    color: rgb(11, 11, 11);
+    padding-bottom: 2rem;
+}
+
+hr {
+    size: 50;
+    width: 100;
+}
+
+h1.page-title > a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.app-container {
+    width: 60rem;
+    margin: 0 auto;
+    /* background-color: red; */
+}
+
+.layer {
+    margin-top: 1rem;
+}
+
+.layer h2 {
+    /* margin-top: 1rem; */
+    margin: 0;
+    margin-bottom: 0.5rem;
+}
+
+.layer > .layer {
+    /* margin-top: 0.5rem; */
+}
+
+.lists-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-flow: row wrap;
+    /* background-color: blue; */
+    gap: 2rem;
+}
+
+.list-item {
+    /* background-color: green; */
+    flex-basis: 48%;
+    /* width: 48%; */
+}
+
+.list-item-output {
+    /* background-color: green; */
+    /* flex-basis: 48%; */
+    /* width: 48%; */
+}
+
+/* Medium screens */
+@media all and (max-width: 59.99rem) {
+    .app-container {
+        width: 100%;
+        margin: 0 auto;
+        /* background-color: red; */
+    }
+
+    .list-item {
+        /* background-color: green; */
+        flex-basis: 98%;
+        /* width: 48%; */
+    }
+}
+
+.list-label {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-bottom: 0.25rem;
+}
+
+.list-textarea {
+    /* flex-grow: 1; */
+    font-family: 'Oswald', 'Arial', sans-serif;
+    font-size: 1.25rem;
+    color: rgb(66, 66, 66);
+    padding: 0.5rem;
+    border: 2px solid rgb(44, 44, 44);
+    /* line-height: 0.95; */
+}
+
+.list-textarea-input {
+    width: 95%;
+    background: honeydew;
+    background-color: honeydew;
+}
+
+.list-textarea-output {
+    width: 95%;
+    background: seashell;
+    background-color: seashell;
+}
+
+/* Your existing CSS rules */
+.form-control {
+}
+.list-a-class {
+    /* Add your styles for list A */
+}
+.list-b-class {
+    /* Add your styles for list B */
+}
+.form-check-input {
+    /* Add your styles for form check input */
+}
+
+.all-options-layer {
+}
+
+.all-options-container {
+    /* background-color: purple; */
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2rem 5rem;
+    justify-content: flex-start;
+}
+
+.all-input-options {
+}
+
+.all-output-options {
+}
+
+.options-container {
+    /* background-color: yellow; */
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem 1rem;
+    justify-content: flex-start;
+}
+
+.option-choice {
+    /* Add your styles for sort order */
+}
+
+.option-label {
+    font-weight: bold;
+}
+
+.option-form-group {
+    border: 1px solid rgb(77, 77, 77);
+    padding: 0.5rem;
+    /* background-color: yellow; */
+}
+
+.output-delimiter-container {
+}
+
+.sort-order-container {
+}
+
+.submit_button {
+    /* border-radius: 0.5rem; */
+    background-color: rgb(28, 191, 28);
+    border: 1px solid rgb(77, 77, 77);
+    color: rgb(33, 33, 33);
+    font-family: 'Oswald', 'Arial', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+div.notes {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+}
+
+.disabled-element {
+    color: lightgray;
+    text-decoration: line-through;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.dirty {
+    background-color: rgb(255, 255, 0);
+}
+
+.link {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#all-options-container {
+}
+
+div.reset-options-button {
+    width: 100%;
+    text-align: right;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>
+      {% block title_tag %}
+        Title Tag
+      {% endblock %}
+    </title>
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+
+    <link rel="icon" href="{% static 'favicon.ico' %}" />
+    <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml" /> <link rel="apple-touch-icon" href="{% static 'apple-touch-icon.png' %}" />
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}" /> <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+  </head>
+
+  <body>
+    {% block content %}
+
+    {% endblock %}
+  </body>
+</html>

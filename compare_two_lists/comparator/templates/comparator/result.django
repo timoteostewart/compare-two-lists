@@ -1,0 +1,193 @@
+{% extends 'core/base.django' %}
+
+{% block title_tag %}
+  Compare Two Lists
+{% endblock %}
+
+{% block content %}
+  <div class="app-container">
+    <h1 class="page-title"><a href="/">Compare Two Lists</a></h1>
+
+    <form id="main-form" method="post">
+      {% csrf_token %}
+      <div class="layer lists-layer">
+        <div class="lists-container">
+          <div class="list-item">
+            <div class="list-label input-list">
+              <label for="{{ form.list_a.id_for_label }}" class="list-label">{{ form.list_a.label }}</label>
+            </div> <!-- .list-label -->
+            <div>{{ form.list_a }}</div>
+          </div>
+          <div class="list-item">
+            <div class="list-label input-list">
+              <label for="{{ form.list_b.id_for_label }}" class="list-label">{{ form.list_b.label }}</label>
+            </div> <!-- .list-label -->
+            <div>{{ form.list_b }}</div>
+          </div>
+        </div> <!-- .lists-container -->
+      </div> <!-- .layer -->
+
+      <div class="layer all-options-layer">
+        <div id="option-layer-title-tray" class="option-layer-title-tray">
+          <span id="option-layer-title" class="cursor-pointer">Options [☰]</span>
+        </div>
+        <div id="all-options-container-below-title" class="hidden">
+          <div id="all-options-container" class="all-options-container">
+            <div class="layer all-input-options">
+              <h2>Input options</h2>
+              <div class="options-container">
+                <div class="option-form-group input-delimiter-container">
+                  <div>
+                    <label class="option-label">{{ form.input_delimiter.label }}</label>
+                  </div>
+                  <div>{{ form.input_delimiter }}</div>
+                </div> <!-- .form-group -->
+              </div> <!-- .options-container -->
+            </div> <!-- .layer.all-input-options -->
+
+            <div class="layer all-output-options">
+              <h2>Output options</h2>
+              <div class="options-container">
+                <div class="option-form-group output-delimiter-container">
+                  <div>
+                    <label class="option-label">{{ form.output_delimiter.label }}</label>
+                  </div>
+                  <div>{{ form.output_delimiter }}</div>
+                </div>
+
+                <div class="option-form-group item-enclosure-container">
+                  <div>
+                    <label class="option-label">{{ form.item_enclosure.label }}</label>
+                  </div>
+                  <div>{{ form.item_enclosure }}</div>
+                </div>
+                <div class="option-form-group list-enclosure-container">
+                  <div>
+                    <label class="option-label">{{ form.list_enclosure.label }}</label>
+                  </div>
+                  <div>{{ form.list_enclosure }}</div>
+                </div>
+                <div class="option-form-group sort-order-container">
+                  <div>
+                    <label class="option-label">{{ form.sort_order.label }}</label>
+                  </div>
+                  <div>{{ form.sort_order }}</div>
+                </div>
+
+                <div class="option-form-group special-format-container">
+                  <div>
+                    <label class="option-label">{{ form.special_output_format.label }}</label>
+                  </div>
+                  <div>{{ form.special_output_format }}</div>
+                </div>
+              </div> <!-- options-container -->
+            </div> <!-- .layer.all-output-options -->
+          </div>
+          <div id="reset-options-button" class="invisible link reset-options-button">Reset options to defaults.</div>
+        </div>
+      </div> <!-- .layer.all-options-layer -->
+
+      <div class="layer">
+        <button type="submit" class="submit_button">Compare A and B</button>
+      </div>
+    </form>
+
+    <hr />
+
+    <div class="layer">
+      <h2>Results</h2>
+      {% comment %}TODO: arrange fields in same pattern as http://barc.wi.mit.edu/tools/compare/ results{% endcomment %}
+      {% comment %}TODO: select output options: python list, comma delimited, json, space delimited, etc.{% endcomment %}
+      <div class="lists-container">
+        <div class="list-item-output">
+          <div class="list-label output-list">List A ({{ result.list_a_count }}):</div>
+          <textarea class="list-textarea list-textarea-input" readonly rows="3" cols="40">{{ result.list_a }}</textarea>
+        </div>
+        <div class="list-item-output">
+          <div class="list-label output-list">List B ({{ result.list_b_count }}):</div>
+          <textarea class="list-textarea list-textarea-input" readonly rows="3" cols="40">{{ result.list_b }}</textarea>
+        </div>
+
+        <div class="list-item-output">
+          <div class="list-label output-list">A − B (i.e., in A only) ({{ result.a_minus_b_count }}):</div>
+          <textarea class="list-textarea list-textarea-output" readonly rows="5" cols="40">{{ result.a_minus_b|safe }}</textarea>
+        </div>
+
+        <div class="list-item-output">
+          <div class="list-label output-list">B − A (i.e., in B only) ({{ result.b_minus_a_count }}):</div>
+          <textarea class="list-textarea list-textarea-output" readonly rows="5" cols="40">{{ result.b_minus_a|safe }}</textarea>
+        </div>
+
+        <div class="list-item-output">
+          <div class="list-label output-list">A ∩ B (i.e., common to A and B) ({{ result.intersection_count }}):</div>
+          <textarea class="list-textarea list-textarea-output" readonly rows="5" cols="40">{{ result.intersection|safe }}</textarea>
+        </div>
+        <div class="list-item-output">
+          <div class="list-label output-list">A ∪ B (i.e., all of A and B) ({{ result.union_count }}):</div>
+          <textarea class="list-textarea list-textarea-output" readonly rows="5" cols="40">{{ result.union|safe }}</textarea>
+        </div>
+      </div>
+
+      <div class="notes">Results notes: {{ result.results_notes }}</div>
+    </div>
+  </div> <!-- .app-container -->
+
+  <script>
+    const allOptionsContainer = document.getElementById('all-options-container-below-title')
+    const mainForm = document.getElementById('main-form')
+    const optionTrayTitle = document.getElementById('option-layer-title')
+    const radioGroups = mainForm.querySelectorAll('div.option-choice')
+    const radioInputs = mainForm.querySelectorAll('input[type="radio"]')
+    
+    function arraysEqual(a, b) {
+      return a.length === b.length && a.every((val, index) => val === b[index])
+    }
+    
+    function checkRadioInputs(radioGroups) {
+      indices = []
+      radioGroups.forEach((group, groupIndex) => {
+        radioInputs.forEach((button, index) => {
+          if (button.checked) {
+            indices.push(index)
+          }
+        })
+      })
+    
+      const resetOptionsButton = document.getElementById('reset-options-button')
+      if (arraysEqual(indices, [1, 1, 0, 0, 0, 0])) {
+        optionTrayTitle.classList.remove('dirty')
+        resetOptionsButton.classList.add('invisible')
+      } else {
+        optionTrayTitle.classList.add('dirty')
+        resetOptionsButton.classList.remove('invisible')
+      }
+    }
+    
+    window.onload = function () {
+      document.querySelectorAll('[disabled="disabled"]').forEach(function (element) {
+        element.parentElement.classList.add('disabled-element')
+      })
+    
+      radioInputs.forEach(function (eachRadioInput) {
+        eachRadioInput.addEventListener('change', function () {
+          checkRadioInputs(radioGroups)
+        })
+      })
+    
+      const resetOptionsButton = document.getElementById('reset-options-button')
+      const defaultOptions = ['id_input_delimiter_newline_1', 'id_output_delimiter_newline_1', 'id_item_enclosure_none_0', 'id_list_enclosure_none_0', 'id_sort_order_0', 'id_special_output_format_none_0']
+      resetOptionsButton.addEventListener('click', function () {
+        defaultOptions.forEach(function (option) {
+          document.getElementById(option).checked = true
+        })
+        optionTrayTitle.classList.remove('dirty')
+        resetOptionsButton.classList.add('invisible')
+      })
+    }
+    
+    document.getElementById('option-layer-title-tray').addEventListener('click', function () {
+      allOptionsContainer.classList.toggle('hidden')
+      optionTrayTitle.textContent = allOptionsContainer.classList.contains('hidden') ? 'Options [☰]' : 'Options [✕]'
+    })
+  </script>
+{% endblock %}
