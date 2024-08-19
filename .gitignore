@@ -1,14 +1,10 @@
-
-
 # ==================================================
 # project-level excludes
-
 
 django_secret_key.py
 secrets.py
 secrets.txt
-
-
+nginx-files/
 
 # ==================================================
 # Source: https://raw.githubusercontent.com/github/gitignore/main/Python.gitignore
