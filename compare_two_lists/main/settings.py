@@ -15,7 +15,7 @@ from pathlib import Path
 
 from . import django_secret_key
 
-os.environ["DJANGO_SETTINGS_MODULE"] = "compare_two_lists.settings"
+os.environ["DJANGO_SETTINGS_MODULE"] = "main.settings"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -62,7 +62,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "compare_two_lists.urls"
+ROOT_URLCONF = "main.urls"
 
 TEMPLATES = [
     {
@@ -83,7 +83,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "compare_two_lists.wsgi.application"
+WSGI_APPLICATION = "main.wsgi.application"
 
 
 # Database

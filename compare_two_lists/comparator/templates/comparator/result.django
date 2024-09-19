@@ -73,13 +73,6 @@
                   </div>
                   <div>{{ form.sort_order }}</div>
                 </div>
-
-                <div class="option-form-group special-format-container">
-                  <div>
-                    <label class="option-label">{{ form.special_output_format.label }}</label>
-                  </div>
-                  <div>{{ form.special_output_format }}</div>
-                </div>
               </div> <!-- options-container -->
             </div> <!-- .layer.all-output-options -->
           </div>
@@ -143,18 +136,18 @@
       return a.length === b.length && a.every((val, index) => val === b[index])
     }
     
-    function checkRadioInputs(radioGroups) {
+    function tallyRadioInputs(radioGroups) {
       indices = []
-      radioGroups.forEach((group, groupIndex) => {
-        radioInputs.forEach((button, index) => {
-          if (button.checked) {
-            indices.push(index)
-          }
-        })
+    
+      radioInputs.forEach((button, index) => {
+        if (button.checked) {
+          indices.push(index)
+        }
       })
+      console.log(indices)
     
       const resetOptionsButton = document.getElementById('reset-options-button')
-      if (arraysEqual(indices, [1, 1, 0, 0, 0, 0])) {
+      if (arraysEqual(indices, [1, 6, 10, 16, 22])) {
         optionTrayTitle.classList.remove('dirty')
         resetOptionsButton.classList.add('invisible')
       } else {
@@ -170,7 +163,7 @@
     
       radioInputs.forEach(function (eachRadioInput) {
         eachRadioInput.addEventListener('change', function () {
-          checkRadioInputs(radioGroups)
+          tallyRadioInputs(radioGroups)
         })
       })
     

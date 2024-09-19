@@ -1,0 +1,10 @@
+[Unit]
+Description=Compare Two Lists dev webserver
+
+[Service]
+ExecStart=/srv/compare-two-lists-project/start-test-server.sh
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
